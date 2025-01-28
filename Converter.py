@@ -9,11 +9,20 @@ app = Flask(__name__)
 def home():
     return jsonify({"message": "Welcome to the Image Converter API!", "status": "live"}), 200
 
-@app.route('/convert-image', methods=['GET'])
+@app.route('/convert-image', methods=['GET', 'POST'])
 def convert_image():
-    image_url = request.args.get('url')
-    if not image_url:
-        return jsonify({'error': 'No URL provided'}), 400
+    image_url = None
+
+    if request.method == 'GET':
+        image_url = request.args.get('url')
+        if not image_url:
+            return jsonify({'error': 'No URL provided in query parameters'}), 400
+
+    elif request.method == 'POST':
+        data = request.get_json()
+        if not data or 'url' not in data:
+            return jsonify({'error': 'No URL provided in request body'}), 400
+        image_url = data['url']
 
     try:
         response = requests.get(image_url)

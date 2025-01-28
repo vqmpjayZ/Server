@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return jsonify({"message": "Welcome to the Image Converter API!", "status": "live"}), 200
+    return jsonify({"message": "Welcome to the Image Converter API!", "status": "deployed"}), 200
 
 @app.route('/convert-image', methods=['GET', 'POST'])
 def convert_image():

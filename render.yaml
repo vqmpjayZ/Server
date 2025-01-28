@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: image-converter-api
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    region: oregon
+    branch: main
+    runtime: python

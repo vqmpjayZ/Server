@@ -5,6 +5,10 @@ from io import BytesIO
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome to the Image Converter API!", "status": "live"}), 200
+
 @app.route('/convert-image', methods=['GET'])
 def convert_image():
     image_url = request.args.get('url')
